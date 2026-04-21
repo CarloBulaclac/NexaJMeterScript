@@ -127,7 +127,7 @@
         <stringProp name="TestPlan.comments">9 45</stringProp>
       </ThreadGroup>
       <hashTree>
-        <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+        <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="false">
           <stringProp name="CounterConfig.start">1</stringProp>
           <stringProp name="CounterConfig.end"></stringProp>
           <stringProp name="CounterConfig.incr">1</stringProp>
@@ -136,7 +136,7 @@
           <boolProp name="CounterConfig.per_user">true</boolProp>
         </CounterConfig>
         <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="false">
           <stringProp name="delimiter">,</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="filename">C:/Users/CCALLEJA/Desktop/77 Internal Project/Nexa/Script/Updated Scripts Jan 2025/QAT_credentials_TESTER.csv</stringProp>
@@ -50445,7 +50445,7 @@ Xï¿½Z(T&apos;|i&#xf;v}ï¿½)sï¿½Vï¿½ï¿½ï¿½ï¿½zï¿½~D&#x1e;ï¿½ï¿½&#x8;}ZqWïµ®&#x16;ï
         </TestAction>
         <hashTree/>
       </hashTree>
-      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
@@ -50479,7 +50479,7 @@ Xï¿½Z(T&apos;|i&#xf;v}ï¿½)sï¿½Vï¿½ï¿½ï¿½ï¿½zï¿½~D&#x1e;ï¿½ï¿½&#x8;}ZqWïµ®&#x16;ï
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">C:\Users\CCALLEJA\Desktop\77 Internal Project\Nexa\Test Result\01092025\77NEXA_75Users_PreCleanUp_01092025.csv</stringProp>
+        <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree - ERROR ONLY" enabled="false">
