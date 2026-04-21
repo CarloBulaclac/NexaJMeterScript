@@ -2,31 +2,29 @@ pipeline {
     agent any
 
     triggers {
-        cron('H 2 * * *') // daily run
+        cron('H 2 * * *')
     }
 
     environment {
-        JMETER_HOME = '/opt/jmeter'
-        TEST_PLAN = 'test_plan.jmx'
         RESULTS = 'results.jtl'
         REPORT_DIR = 'report'
     }
 
     stages {
-        stage('Checkout') {
+
+        stage('Clean Workspace') {
             steps {
-                // Jenkins already checks out SCM, but this is safe
-                git 'https://github.com/CarloBulaclac/NexaJMeterScript.git'
+                sh '''
+                rm -rf ${RESULTS} ${REPORT_DIR}
+                '''
             }
         }
 
         stage('Run JMeter Test') {
             steps {
                 sh '''
-                rm -rf ${REPORT_DIR}
-
-                ${JMETER_HOME}/bin/jmeter -n \
-                  -t ${TEST_PLAN} \
+                jmeter -n \
+                  -t test_plan.jmx \
                   -l ${RESULTS} \
                   -e -o ${REPORT_DIR}
                 '''
@@ -35,7 +33,7 @@ pipeline {
 
         stage('Archive Results') {
             steps {
-                archiveArtifacts artifacts: '*.jtl, report/**', fingerprint: true
+                archiveArtifacts artifacts: 'results.jtl, report/**', fingerprint: true
             }
         }
     }
