@@ -6,6 +6,7 @@ pipeline {
     }
 
     environment {
+        JMETER = '/opt/jmeter/bin/jmeter'
         RESULTS = 'results.jtl'
         REPORT_DIR = 'report'
     }
@@ -23,7 +24,7 @@ pipeline {
         stage('Run JMeter Test') {
             steps {
                 sh '''
-                jmeter -n \
+                ${JMETER} -n \
                   -t test_plan.jmx \
                   -l ${RESULTS} \
                   -e -o ${REPORT_DIR}
