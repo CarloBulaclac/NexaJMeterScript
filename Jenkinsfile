@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         JMETER_HOME = '/opt/jmeter'
-        TEST_PLAN = 'NEXA Sample Script.jmx'
+        TEST_PLAN = 'test_plan.jmx'
         RESULTS = 'results.jtl'
         REPORT_DIR = 'report'
     }
@@ -16,7 +16,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Jenkins already checks out SCM, but this is safe
-                git 'https://github.com/your-username/your-repo.git'
+                git 'https://github.com/CarloBulaclac/NexaJMeterScript.git'
             }
         }
 
