@@ -1,41 +1,50 @@
 pipeline {
-    agent any
+agent any
 
-    triggers {
-        cron('H 2 * * *')
-    }
+environment {
+    JMETER = '/opt/jmeter/bin/jmeter'
+    RESULTS = 'results.jtl'
+    REPORT_DIR = 'report'
+}
 
-    environment {
-        JMETER = '/opt/jmeter/bin/jmeter'
-        RESULTS = 'results.jtl'
-        REPORT_DIR = 'report'
-    }
+stages {
 
-    stages {
+    stage('Install JMeter (if needed)') {
+        steps {
+            sh '''
+            if [ ! -x /opt/jmeter/bin/jmeter ]; then
+              echo "JMeter not found. Installing..."
 
-        stage('Clean Workspace') {
-            steps {
-                sh '''
-                rm -rf ${RESULTS} ${REPORT_DIR}
-                '''
-            }
-        }
+              apt update
+              apt install -y wget unzip
 
-        stage('Run JMeter Test') {
-            steps {
-                sh '''
-                ${JMETER} -n \
-                  -t test_plan.jmx \
-                  -l ${RESULTS} \
-                  -e -o ${REPORT_DIR}
-                '''
-            }
-        }
+              wget -q https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.6.3.tgz
+              tar -xzf apache-jmeter-5.6.3.tgz
+              mv apache-jmeter-5.6.3 /opt/jmeter
 
-        stage('Archive Results') {
-            steps {
-                archiveArtifacts artifacts: 'results.jtl, report/**', fingerprint: true
-            }
+            else
+              echo "JMeter already installed. Skipping install."
+            fi
+            '''
         }
     }
+
+    stage('Run JMeter Test') {
+        steps {
+            sh '''
+            ${JMETER} -n \
+              -t test_plan.jmx \
+              -l ${RESULTS} \
+              -e -o ${REPORT_DIR}
+            '''
+        }
+    }
+
+    stage('Archive Results') {
+        steps {
+            archiveArtifacts artifacts: 'results.jtl, report/**', fingerprint: true
+        }
+    }
+}
+
 }
