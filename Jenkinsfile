@@ -32,6 +32,7 @@ stages {
     stage('Run JMeter Test') {
         steps {
             sh '''
+            rm -rf ${REPORT_DIR} ${RESULTS}
             ${JMETER} -n \
               -t test_plan.jmx \
               -l ${RESULTS} \
